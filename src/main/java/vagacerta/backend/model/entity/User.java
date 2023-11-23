@@ -2,8 +2,10 @@ package vagacerta.backend.model.entity;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -36,6 +38,13 @@ public class User implements UserDetails
     @NotBlank
     @Length(min = 6)
     private String password;
+
+    @NotNull
+    private boolean termService;
+
+    @NotNull
+    @AssertTrue
+    private boolean termUser;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Candidate candidate;

@@ -37,7 +37,7 @@ public class Vacancies
     private Boolean mealVoucher;
 
     @NotNull
-    private Boolean formContract;
+    private String formContract;
 
     @ManyToOne
     @JoinColumn(name = "company_id")
