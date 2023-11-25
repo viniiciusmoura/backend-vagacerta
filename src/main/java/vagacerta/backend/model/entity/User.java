@@ -30,20 +30,20 @@ public class User implements UserDetails
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+    @NotBlank(message = "email em branco")
     @Email
     @Column(unique = true)
     private String email;
 
-    @NotBlank
+    @NotBlank(message = "password em branco")
     @Length(min = 6)
     private String password;
 
-    @NotNull
+    @NotNull(message = "termo de serviço")
     private boolean termService;
 
-    @NotNull
-    @AssertTrue
+    @NotNull(message = "termuser invalido")
+    @AssertTrue(message = "termuser deve ser true")
     private boolean termUser;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
