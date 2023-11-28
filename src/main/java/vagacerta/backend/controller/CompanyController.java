@@ -2,13 +2,16 @@ package vagacerta.backend.controller;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import vagacerta.backend.model.entity.Company;
+import vagacerta.backend.model.response.CompanyDTO;
 import vagacerta.backend.model.service.CompanyService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("api/v1/companies")
@@ -17,10 +20,16 @@ public class CompanyController
 {
     private final CompanyService service;
 
+    private final ModelMapper modelMapper;
+
     @GetMapping
-    public ResponseEntity<List<Company>> fetchAll()
+    public ResponseEntity<List<CompanyDTO>> fetchAll()
     {
-        return new ResponseEntity<List<Company>>(service.all(), HttpStatus.OK);
+        List<CompanyDTO> companys = service.all()
+                .stream()
+                .map(company -> modelMapper.map(company, CompanyDTO.class))
+                .collect(Collectors.toList());
+        return new ResponseEntity<List<CompanyDTO>>(companys, HttpStatus.OK);
     } //Get All Company
 
     @PostMapping("save")

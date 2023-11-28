@@ -3,25 +3,36 @@ package vagacerta.backend.controller;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import vagacerta.backend.model.entity.Candidate;
+import vagacerta.backend.model.response.CandidateDTO;
 import vagacerta.backend.model.service.CandidateService;
 
+
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("api/v1/cadidates")
+@RequestMapping("api/v1/candidates")
 public class CandidateController
 {
 
     private final CandidateService service;
+
+    private final ModelMapper modelMapper;
+
     @GetMapping
-    public ResponseEntity<List<Candidate>> fetchAll()
+    public ResponseEntity<List<CandidateDTO>> fetchAll()
     {
-        return new ResponseEntity<List<Candidate>>(service.all(), HttpStatus.OK);
+        List<CandidateDTO> cadidateDTOS = service.all()
+                                                .stream()
+                                                .map(candidate -> modelMapper.map(candidate, CandidateDTO.class))
+                                                .collect(Collectors.toList());
+        return new ResponseEntity<List<CandidateDTO>>(cadidateDTOS, HttpStatus.OK);
     } //Get All cadidatos
 
     @PostMapping("save")

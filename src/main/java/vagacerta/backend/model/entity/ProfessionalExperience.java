@@ -39,8 +39,7 @@ public class ProfessionalExperience
     @PastOrPresent
     @Temporal(TemporalType.DATE)
     private Date endDate;
-
-    @NotNull
+    
     @ManyToOne
     @JoinColumn(name = "candidate_id")
     private Candidate candidate;

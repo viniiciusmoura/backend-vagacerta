@@ -36,12 +36,14 @@ public class SecurityConfiguration
     {
         return httpSecurity
                 .cors(Customizer.withDefaults())
-//                .httpBasic(Customizer.withDefaults())
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "api/v1/auth/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/v1/user/save").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/v1/candidates").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/v1/companies").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/v1/vacancies").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/v1/user/email/{email}").permitAll()
                         .anyRequest().authenticated()
                 )
@@ -64,10 +66,9 @@ public class SecurityConfiguration
     CorsConfigurationSource corsConfigurationSource()
     {
         var corsConfiguration = new CorsConfiguration();
-        corsConfiguration.setAllowedOrigins(List.of("http://localhost:3000"));
+        corsConfiguration.setAllowedOrigins(List.of("*"));
         corsConfiguration.setAllowedMethods(List.of("GET", "POST", "DELETE", "PUT", "OPTIONS"));
-        corsConfiguration.setAllowedHeaders(List.of("Authorization", "Access-Control-Allow-Origin", "Content-Type",
-                "X-Requested-With", "accept", "Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers"));
+        corsConfiguration.setAllowedHeaders(List.of("*"));
         var source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", corsConfiguration);
         return source;

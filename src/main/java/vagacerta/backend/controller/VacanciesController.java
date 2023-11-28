@@ -2,14 +2,18 @@ package vagacerta.backend.controller;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import vagacerta.backend.model.entity.Vacancies;
+import vagacerta.backend.model.response.CompanyDTO;
+import vagacerta.backend.model.response.VacanciesDTO;
 import vagacerta.backend.model.service.VacanciesService;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @AllArgsConstructor
@@ -19,10 +23,16 @@ public class VacanciesController
 
     private final VacanciesService service;
 
+    private final ModelMapper modelMapper;
+
     @GetMapping
-    public ResponseEntity<List<Vacancies>> fetchAll()
+    public ResponseEntity<List<VacanciesDTO>> fetchAll()
     {
-        return new ResponseEntity<List<Vacancies>>(service.all(), HttpStatus.OK);
+        List<VacanciesDTO> vacanciesDTOS = service.all()
+                                                    .stream()
+                                                    .map(vacancies -> modelMapper.map(vacancies, VacanciesDTO.class))
+                                                    .collect(Collectors.toList());
+        return new ResponseEntity<List<VacanciesDTO>>(vacanciesDTOS, HttpStatus.OK);
     } //Get All
 
     @PostMapping("save")
