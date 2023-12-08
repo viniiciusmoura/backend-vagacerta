@@ -23,4 +23,5 @@ public interface CandidateRepository extends JpaRepository<Candidate, Long>
             "WHERE addr.state LIKE %:state%")
     List<Candidate> findByAddressStateContaining(String state);
 
+    Candidate findByUserId(Long id);
 }

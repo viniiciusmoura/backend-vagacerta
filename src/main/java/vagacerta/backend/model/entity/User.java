@@ -1,6 +1,7 @@
 package vagacerta.backend.model.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.Email;
@@ -46,9 +47,11 @@ public class User implements UserDetails
     @AssertTrue(message = "termuser deve ser true")
     private boolean termUser;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Candidate candidate;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Company company;
 

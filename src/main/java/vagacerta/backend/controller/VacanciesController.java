@@ -3,6 +3,7 @@ package vagacerta.backend.controller;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,20 +21,29 @@ import java.util.stream.Collectors;
 @RequestMapping("api/v1/vacancies")
 public class VacanciesController
 {
-
     private final VacanciesService service;
 
-    private final ModelMapper modelMapper;
-
     @GetMapping
-    public ResponseEntity<List<VacanciesDTO>> fetchAll()
+    public ResponseEntity<List<Vacancies>> fetchAll()
     {
-        List<VacanciesDTO> vacanciesDTOS = service.all()
-                                                    .stream()
-                                                    .map(vacancies -> modelMapper.map(vacancies, VacanciesDTO.class))
-                                                    .collect(Collectors.toList());
-        return new ResponseEntity<List<VacanciesDTO>>(vacanciesDTOS, HttpStatus.OK);
+        return new ResponseEntity<List<Vacancies>>(service.all(), HttpStatus.OK);
+//        var vacanciesDTOS = service.all()
+//                                                    .stream()
+//                                                    .map(vacancies -> modelMapper.map(vacancies, VacanciesDTO.class))
+//                                                    .collect(Collectors.toList());
+//        return new ResponseEntity<List<VacanciesDTO>>(vacanciesDTOS, HttpStatus.OK);
     } //Get All
+
+    @GetMapping("company/{id}")
+    public ResponseEntity<List<Vacancies>> fetchAllCompanyId(@PathVariable Long id)
+    {
+        return new ResponseEntity<List<Vacancies>>(service.allCompanyId(id), HttpStatus.OK);
+//        List<VacanciesDTO> vacanciesDTOS = service.allCompanyId(id)
+//                .stream()
+//                .map(vacancies -> modelMapper.map(vacancies, VacanciesDTO.class))
+//                .collect(Collectors.toList());
+//        return new ResponseEntity<List<VacanciesDTO>>(vacanciesDTOS, HttpStatus.OK);
+    }
 
     @PostMapping("save")
     public ResponseEntity<Vacancies> save(@Valid @RequestBody Vacancies vacancies)

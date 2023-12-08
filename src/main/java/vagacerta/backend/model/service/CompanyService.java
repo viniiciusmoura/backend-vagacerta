@@ -31,6 +31,7 @@ public class CompanyService
                 .map(c -> {
                     c.setSocialReason(company.getSocialReason());
                     c.setAreaOfActivity(company.getAreaOfActivity());
+                    c.setCnpj(company.getCnpj());
                     return repository.save(c);
                 }).orElse(null);
     }

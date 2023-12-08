@@ -19,6 +19,11 @@ public class VacanciesService
         return repository.findAll();
     }
 
+    public List<Vacancies> allCompanyId(Long id)
+    {
+        return repository.findByCompanyId(id);
+    }
+
     public Vacancies createOrUpdate(Vacancies vocancies)
     {
         return repository.save(vocancies);

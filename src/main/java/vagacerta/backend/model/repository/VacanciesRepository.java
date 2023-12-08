@@ -14,4 +14,6 @@ public interface VacanciesRepository extends JpaRepository<Vacancies, Long>
 
     List<Vacancies> findBySalaryGreaterThan(BigDecimal salary);
 
+    List<Vacancies> findByCompanyId(Long id);
+
 }

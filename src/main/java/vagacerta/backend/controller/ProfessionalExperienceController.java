@@ -22,7 +22,14 @@ public class ProfessionalExperienceController
     public ResponseEntity<List<ProfessionalExperience>> fetchAll()
     {
         return new ResponseEntity<List<ProfessionalExperience>>(service.all(), HttpStatus.OK);
-    } //Get All
+    } //Get All\
+
+    @GetMapping("candidate/{id}")
+    public ResponseEntity<List<ProfessionalExperience>> fetchCandidateXP(@PathVariable Long id)
+    {
+        return new ResponseEntity<List<ProfessionalExperience>>(service.getCandidateXP(id), HttpStatus.OK);
+    } //Get All\
+
 
     @PostMapping("save")
     public ResponseEntity<ProfessionalExperience> save(@Valid @RequestBody ProfessionalExperience experience)

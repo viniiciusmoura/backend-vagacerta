@@ -1,5 +1,6 @@
 package vagacerta.backend.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -36,7 +37,7 @@ public class Vacancies
     @NotNull
     private Boolean mealVoucher;
 
-    @NotNull
+    @NotBlank
     private String formContract;
 
     @ManyToOne

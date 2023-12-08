@@ -50,9 +50,11 @@ public class Candidate
     @JoinColumn( name = "user_id")
     private User user;
 
+    @JsonIgnore
     @OneToMany( mappedBy = "candidate", cascade = CascadeType.ALL)
     private List<ProfessionalExperience> experiences;
 
+    @JsonIgnore
     @OneToMany( mappedBy = "candidate", cascade = CascadeType.ALL)
     private List<Address> addresses;
 

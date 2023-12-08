@@ -1,4 +1,7 @@
 package vagacerta.backend.model.entity.records;
 
-public record LoginResponse(String token) {
+import vagacerta.backend.model.entity.Candidate;
+import vagacerta.backend.model.entity.Company;
+
+public record LoginResponse(String token, Candidate candidate, Company company) {
 }

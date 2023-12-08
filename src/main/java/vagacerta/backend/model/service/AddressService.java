@@ -19,6 +19,16 @@ public class AddressService
         return repository.findAll();
     }
 
+    public List<Address> allCompanyId(Long id)
+    {
+        return repository.findByCompany_Id(id);
+    }
+
+    public List<Address> allCandidateId(Long id)
+    {
+        return repository.findByCandidateId(id);
+    }
+
     public Address create(Address address)
     {
         return repository.save(address);

@@ -18,7 +18,5 @@ public class CandidateDTO
     private String generalRegister;
     private String sex;
     private Date birthdate;
-    private List<Address> addresses;
-    private List<ProfessionalExperience> experiences;
     CandidateDTO(){}
 }

@@ -19,6 +19,10 @@ public class ProfessionalExperienceService
         return repository.findAll();
     }
 
+    public  List<ProfessionalExperience> getCandidateXP(Long id)
+    {
+        return repository.findByCandidateId(id);
+    }
     public ProfessionalExperience createOrUpdate(ProfessionalExperience experience)
     {
         return repository.save(experience);

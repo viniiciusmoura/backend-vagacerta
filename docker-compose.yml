@@ -9,7 +9,8 @@ services:
       - 'POSTGRES_USER=myuser'
     ports:
       - '5432:5432' # Mapeando a porta 5432 do container para a porta 5432 do host
-
+    volumes:
+      - db-data:/var/lib/postgresql/data
   pgadmin:
     image: dpage/pgadmin4
     ports:
@@ -19,4 +20,5 @@ services:
       PGADMIN_DEFAULT_PASSWORD: secret-secret
 
 volumes:
-  postgres_data:
+  db-data:
+    driver: local

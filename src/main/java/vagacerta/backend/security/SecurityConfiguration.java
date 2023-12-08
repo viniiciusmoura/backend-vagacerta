@@ -41,9 +41,9 @@ public class SecurityConfiguration
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "api/v1/auth/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/v1/user/save").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/v1/candidates").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/v1/companies").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/v1/vacancies").permitAll()
+                        .requestMatchers(HttpMethod.GET, "api/v1/candidates").permitAll()
+                        .requestMatchers(HttpMethod.GET, "api/v1/companies").permitAll()
+                        .requestMatchers(HttpMethod.GET, "api/v1/vacancies").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/v1/user/email/{email}").permitAll()
                         .anyRequest().authenticated()
                 )
@@ -67,7 +67,7 @@ public class SecurityConfiguration
     {
         var corsConfiguration = new CorsConfiguration();
         corsConfiguration.setAllowedOrigins(List.of("*"));
-        corsConfiguration.setAllowedMethods(List.of("GET", "POST", "DELETE", "PUT", "OPTIONS"));
+        corsConfiguration.setAllowedMethods(List.of("GET", "POST", "DELETE", "PATCH", "OPTIONS"));
         corsConfiguration.setAllowedHeaders(List.of("*"));
         var source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", corsConfiguration);

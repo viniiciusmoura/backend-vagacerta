@@ -1,6 +1,7 @@
 package vagacerta.backend.model.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -39,9 +40,11 @@ public class Company
     @JoinColumn( name = "user_id")
     private User user;
 
+    @JsonIgnore
     @OneToMany( mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Vacancies> vacancies;
 
+    @JsonIgnore
     @OneToMany( mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Address> addresses;
 

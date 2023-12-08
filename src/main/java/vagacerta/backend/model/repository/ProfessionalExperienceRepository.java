@@ -6,4 +6,5 @@ import vagacerta.backend.model.entity.ProfessionalExperience;
 import java.util.List;
 
 public interface ProfessionalExperienceRepository extends JpaRepository<ProfessionalExperience, Long> {
+    List<ProfessionalExperience> findByCandidateId(Long id);
 }
