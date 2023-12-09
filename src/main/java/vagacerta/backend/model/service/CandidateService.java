@@ -32,6 +32,7 @@ public class CandidateService
                                 c.setName(candidate.getName());
                                 c.setBirthdate(candidate.getBirthdate());
                                 c.setSex(candidate.getSex());
+                                c.setGeneralRegister(candidate.getGeneralRegister());
                                 return repository.save(c);
                             }).orElse(null);
     }
