@@ -19,6 +19,11 @@ public class AddressService
         return repository.findAll();
     }
 
+    public List<String> getStateGroup()
+    {
+        return repository.getAddressState();
+    }
+
     public List<Address> allCompanyId(Long id)
     {
         return repository.findByCompany_Id(id);

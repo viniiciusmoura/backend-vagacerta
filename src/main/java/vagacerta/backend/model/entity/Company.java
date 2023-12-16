@@ -41,11 +41,11 @@ public class Company
     private User user;
 
     @JsonIgnore
-    @OneToMany( mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany( mappedBy = "company", cascade = CascadeType.ALL)
     private List<Vacancies> vacancies;
 
     @JsonIgnore
-    @OneToMany( mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany( mappedBy = "company", cascade = CascadeType.ALL)
     private List<Address> addresses;
 
     public Company(Long id) {

@@ -30,6 +30,12 @@ public class AddressController
         return new ResponseEntity<List<Address>>(service.all(), HttpStatus.OK);
     } //Get All
 
+    @GetMapping("states")
+    public ResponseEntity<List<String>> fetchAllState()
+    {
+        return new ResponseEntity<List<String>>(service.getStateGroup(), HttpStatus.OK);
+    } //Get All
+
     @GetMapping("company/{id}")
     public ResponseEntity<List<Address>> allCompanyId(@PathVariable Long id)
     {

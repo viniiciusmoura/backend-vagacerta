@@ -60,4 +60,9 @@ public class CompanyService
         return repository.findByVacanciesOfficeContaining(office);
     }
 
+    public List<Company> findBySocialReasonLikeOrAreaOfActivity(String search)
+    {
+        return repository.findBySocialReasonLikeOrAreaOfActivityLike(search, search);
+    }
+
 }

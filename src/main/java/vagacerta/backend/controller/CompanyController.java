@@ -58,4 +58,11 @@ public class CompanyController
         return new ResponseEntity<List<Company>>(service.findAddressByState(state), HttpStatus.OK);
     } //Get All by state
 
+    @GetMapping("search/{search}")
+    public ResponseEntity<List<Company>> fetchSearch(@PathVariable String search)
+    {
+        return new ResponseEntity<List<Company>>(service.findBySocialReasonLikeOrAreaOfActivity(search), HttpStatus.OK);
+    } //Get All by serach
+
+
 }
